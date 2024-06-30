@@ -1,6 +1,6 @@
 FROM ubuntu:focal
 
-RUN apt-get update && apt-get install -y tmux wget git build-essential
+RUN apt-get update && apt-get install -y tmux wget git build-essential unzip
 
 USER 0
 
@@ -10,7 +10,12 @@ WORKDIR /root/.config/nvim/
 
 RUN wget https://raw.githubusercontent.com/mainak55512/mainak55512/main/init.lua
 
-WORKDIR ../../../home
+WORKDIR ../..
+RUN wget https://raw.githubusercontent.com/mainak55512/mainak55512/main/.tmux.conf
+RUN git clone https://github.com/tmux-plugins/tpm /root/.tmux/plugins/tpm
+RUN echo -e "export TERM='xterm-256color'" >> /root/.bashrc
+
+WORKDIR ../home
 RUN mkdir -p neovim
 
 WORKDIR neovim/
