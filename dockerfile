@@ -13,7 +13,8 @@ RUN wget https://raw.githubusercontent.com/mainak55512/mainak55512/main/init.lua
 WORKDIR ../..
 RUN wget https://raw.githubusercontent.com/mainak55512/mainak55512/main/.tmux.conf
 RUN git clone https://github.com/tmux-plugins/tpm /root/.tmux/plugins/tpm
-RUN echo -e "export TERM='xterm-256color'" >> /root/.bashrc
+RUN echo "export TERM='xterm-256color'" >> /root/.bashrc
+RUN . /root/.bashrc
 
 WORKDIR ../home
 RUN mkdir -p neovim
