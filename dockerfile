@@ -32,3 +32,20 @@ RUN ln -s /home/neovim/nvim-linux64/bin/nvim
 WORKDIR ../../home
 
 RUN mkdir -p codes
+
+############################################################
+# Instructions
+
+# Build image:
+# ------------
+# docker build -t devenv
+
+# Create container:
+# -----------------
+# docker run --name dev-pod -it devenv bash
+
+# For everyday use:
+# -----------------
+# docker start dev-pod
+# docker attach dev-pod
+
