@@ -38,14 +38,14 @@ RUN mkdir -p codes
 
 # Build image:
 # ------------
-# docker build -t devenv
+# docker build --rm -t devenv .
 
 # Create container:
 # -----------------
-# docker run --name dev-pod -it devenv bash
+# docker run --name dev-pod --env="DISPLAY" --net=host -it devenv bash
 
 # For everyday use:
 # -----------------
 # docker start dev-pod
 # docker attach dev-pod
-
+# docker exec -it dev-pod bash

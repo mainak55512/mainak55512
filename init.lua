@@ -169,6 +169,7 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 
 vim.keymap.set("n", "<C-p>", ":BufferPrevious<cr>")
 vim.keymap.set("n", "<C-n>", ":BufferNext<cr>")
+vim.keymap.set("n", "<C-`>", ":ToggleTerm<cr>")
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -647,7 +648,8 @@ require("lazy").setup({
 			})
 		end,
 	},
-
+	{ "akinsho/toggleterm.nvim", version = "*", config = true },
+	-- or
 	{
 		"crispgm/nvim-tabline",
 		dependencies = { "nvim-tree/nvim-web-devicons" }, -- optional
