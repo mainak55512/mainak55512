@@ -33,7 +33,7 @@ WORKDIR ../../home
 
 RUN mkdir -p codes
 
-############################################################
+###################################################################################################################
 # Instructions
 
 # Build image:
@@ -42,10 +42,17 @@ RUN mkdir -p codes
 
 # Create container:
 # -----------------
-# docker run --name dev-pod --env="DISPLAY" --net=host -it devenv bash
+# For Linux:
+# docker run -v <source/folder/path>:/home/codes --name dev-pod -e DISPLAY=$DISPLAY --net=host -it devenv bash
+
+# For Windows:
+# 1. Install a x-server (VcXsrv)
+# 2. Run the x-server by running xlaunch
+# 3. docker run -v <source/folder/path>:/home/codes --name dev-pod -e DISPLAY=<hostname>:0.0 --net=host -it devenv bash
 
 # For everyday use:
 # -----------------
 # docker start dev-pod
 # docker attach dev-pod
 # docker exec -it dev-pod bash
+##################################################################################################################
