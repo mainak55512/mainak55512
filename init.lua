@@ -1,3 +1,10 @@
+-------------------------------------
+-- File locations:
+-- ===============
+-- For Linux: /home/<user>/.config/nvim/
+-- For Windows: C:\Users\<user>\AppData\Local\nvim
+-------------------------------------
+
 -- Editor settings
 -- ----------------
 
