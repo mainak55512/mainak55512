@@ -1,5 +1,5 @@
 # 💫 About Me:
-I am a programming enthusiast currently working in TCS as a ServiceNow developer.<br>🔭 I’m currently working on 'jproc', a JSON query tool written in JavaScript, have a look at the NPM package(https://www.npmjs.com/package/jproc?activeTab=readme) if that interests you!<br>
+I am a programming enthusiast currently working in TCS as a ServiceNow developer.<br>🔭 I’m currently working on 'stto' a line of code counter written in Golang, have a look at the repo(https://github.com/mainak55512/stto) if that interests you!<br>
 
 
 ## 🌐 Socials:
