@@ -12,6 +12,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.mouse = "a"
 vim.opt.showmode = false
 vim.opt.clipboard = "unnamedplus"
@@ -37,7 +38,7 @@ vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagn
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 vim.keymap.set("n", "<C-p>", ":BufferPrevious<cr>")
 vim.keymap.set("n", "<C-n>", ":BufferNext<cr>")
-vim.keymap.set("n", "<C-`>", ":ToggleTerm<cr>")
+vim.keymap.set("n", "<C-t>", ":ToggleTerm<cr>")
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
@@ -77,25 +78,49 @@ require("lazy").setup({
 		},
 	},
 	{
-		"folke/which-key.nvim",
+		"nvimdev/dashboard-nvim",
 		event = "VimEnter",
 		config = function()
-			require("which-key").setup()
-			require("which-key").register({
-				["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-				["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-				["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-				["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-				["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
-				["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
-				["<leader>h"] = { name = "Git [H]unk", _ = "which_key_ignore" },
+			require("dashboard").setup({
+				-- config
 			})
-			require("which-key").register({
-				["<leader>h"] = { "Git [H]unk" },
-			}, { mode = "v" })
 		end,
+		dependencies = { { "nvim-tree/nvim-web-devicons" } },
 	},
+	{
+		"folke/which-key.nvim",
+		event = "VimEnter",
+		-- config = function()
+		-- 	require("which-key").setup()
+		-- 	require("which-key").register({
+		-- 		["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
+		-- 		["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
+		-- 		["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
+		-- 		["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
+		-- 		["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
+		-- 		["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
+		-- 		["<leader>h"] = { name = "Git [H]unk", _ = "which_key_ignore" },
+		-- 	})
+		-- 	require("which-key").register({
+		-- 		["<leader>h"] = { "Git [H]unk" },
+		-- 	}, { mode = "v" })
+		-- end,
+	},
+	{
+		"rmagatti/auto-session",
+		lazy = false,
+		dependencies = {
+			"nvim-telescope/telescope.nvim", -- Only needed if you want to use session lens
+		},
 
+		---enables autocomplete for opts
+		---@module "auto-session"
+		-- -@type AutoSession.Config
+		opts = {
+			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+			-- log_level = 'debug',
+		},
+	},
 	{
 		"nvim-telescope/telescope.nvim",
 		event = "VimEnter",
@@ -365,12 +390,25 @@ require("lazy").setup({
 
 	-- Theme setup
 	-- -----------
+	-- {
+	-- 	"f4z3r/gruvbox-material.nvim",
+	-- 	name = "gruvbox-material",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		require("gruvbox-material").setup({
+	-- 			contrast = "hard",
+	-- 		})
+	-- 	end,
+	-- },
 	{
-		"AlexvZyl/nordic.nvim",
-		priority = 1000,
-		init = function()
-			vim.cmd.colorscheme("nordic")
-			vim.cmd.hi("Comment gui=none")
+		"tiagovla/tokyodark.nvim",
+		opts = {
+			-- custom options here
+		},
+		config = function(_, opts)
+			require("tokyodark").setup(opts) -- calling setup is optional
+			vim.cmd([[colorscheme tokyodark]])
 		end,
 	},
 	{
