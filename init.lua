@@ -136,27 +136,29 @@ require("lazy").setup({
 			"rcarriga/nvim-notify",
 		},
 	},
-	-- {
-	-- 	"folke/zen-mode.nvim",
-	-- 	opts = {
-	-- 		-- your configuration comes here
-	-- 		-- or leave it empty to use the default settings
-	-- 		-- refer to the configuration section below
-	-- 		twilight = { enabled = true },
-	-- 	},
-	-- 	config = function()
-	-- 		require("zen-mode").toggle()
-	-- 	end,
-	-- },
 	{
-		"nvimdev/dashboard-nvim",
-		event = "VimEnter",
+		"goolord/alpha-nvim",
+		-- dependencies = { 'echasnovski/mini.icons' },
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require("dashboard").setup({
-				-- config
-			})
+			local startify = require("alpha.themes.startify")
+			-- available: devicons, mini, default is mini
+			-- if provider not loaded and enabled is true, it will try to use another provider
+			startify.file_icons.provider = "devicons"
+
+			-- Set header
+			startify.section.header.val = {
+				"                                                     ",
+				"  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
+				"  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+				"  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+				"  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+				"  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+				"  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+				"                                                     ",
+			}
+			require("alpha").setup(startify.config)
 		end,
-		dependencies = { { "nvim-tree/nvim-web-devicons" } },
 	},
 	{
 		"folke/which-key.nvim",
@@ -176,21 +178,6 @@ require("lazy").setup({
 		-- 		["<leader>h"] = { "Git [H]unk" },
 		-- 	}, { mode = "v" })
 		-- end,
-	},
-	{
-		"rmagatti/auto-session",
-		lazy = false,
-		dependencies = {
-			"nvim-telescope/telescope.nvim", -- Only needed if you want to use session lens
-		},
-
-		---enables autocomplete for opts
-		---@module "auto-session"
-		-- -@type AutoSession.Config
-		opts = {
-			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-			-- log_level = 'debug',
-		},
 	},
 	{
 		"nvim-telescope/telescope.nvim",
@@ -345,6 +332,60 @@ require("lazy").setup({
 		config = function()
 			require("nvim-tree").setup({
 				vim.keymap.set("n", "<C-b>", ":NvimTreeToggle<cr>"),
+				sync_root_with_cwd = true,
+				respect_buf_cwd = true,
+				update_focused_file = {
+					enable = true,
+					update_root = true,
+				},
+			})
+		end,
+	},
+	{
+		"ahmedkhalf/project.nvim",
+		config = function()
+			require("project_nvim").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+				-- Manual mode doesn't automatically change your root directory, so you have
+				-- the option to manually do so using `:ProjectRoot` command.
+				manual_mode = false,
+
+				-- Methods of detecting the root directory. **"lsp"** uses the native neovim
+				-- lsp, while **"pattern"** uses vim-rooter like glob pattern matching. Here
+				-- order matters: if one is not detected, the other is used as fallback. You
+				-- can also delete or rearangne the detection methods.
+				detection_methods = { "lsp", "pattern" },
+
+				-- All the patterns used to detect root dir, when **"pattern"** is in
+				-- detection_methods
+				patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "go.mod" },
+
+				-- Table of lsp clients to ignore by name
+				-- eg: { "efm", ... }
+				ignore_lsp = {},
+
+				-- Don't calculate root dir on specific directories
+				-- Ex: { "~/.cargo/*", ... }
+				exclude_dirs = {},
+
+				-- Show hidden files in telescope
+				show_hidden = false,
+
+				-- When set to false, you will get a message when project.nvim changes your
+				-- directory.
+				silent_chdir = true,
+
+				-- What scope to change the directory, valid options are
+				-- * global (default)
+				-- * tab
+				-- * win
+				scope_chdir = "global",
+
+				-- Path where project.nvim will store the project history for use in
+				-- telescope
+				datapath = vim.fn.stdpath("data"),
 			})
 		end,
 	},
