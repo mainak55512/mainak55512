@@ -78,6 +78,77 @@ require("lazy").setup({
 		},
 	},
 	{
+		"rcarriga/nvim-notify",
+		lazy = false,
+		config = function()
+			require("notify").setup({
+				stages = "fade_in_slide_out",
+				background_colour = "FloatShadow",
+				timeout = 3000,
+			})
+			vim.notify = require("notify")
+		end,
+	},
+	{
+		"folke/twilight.nvim",
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+			dimming = {
+				alpha = 0.25, -- amount of dimming
+				-- we try to get the foreground from the highlight groups or fallback color
+				color = { "Normal", "#ffffff" },
+				term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
+				inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
+			},
+			context = 10, -- amount of lines we will try to show around the current line
+			treesitter = true, -- use treesitter when available for the filetype
+			-- treesitter is used to automatically expand the visible text,
+			-- but you can further control the types of nodes that should always be fully expanded
+			expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
+				"function",
+				"method",
+				"table",
+				"if_statement",
+			},
+			exclude = {}, -- exclude these filetypes
+		},
+		-- event = "VimEnter",
+		config = function()
+			require("twilight").setup({
+				vim.cmd("TwilightEnable"),
+			})
+		end,
+	},
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		},
+	},
+	-- {
+	-- 	"folke/zen-mode.nvim",
+	-- 	opts = {
+	-- 		-- your configuration comes here
+	-- 		-- or leave it empty to use the default settings
+	-- 		-- refer to the configuration section below
+	-- 		twilight = { enabled = true },
+	-- 	},
+	-- 	config = function()
+	-- 		require("zen-mode").toggle()
+	-- 	end,
+	-- },
+	{
 		"nvimdev/dashboard-nvim",
 		event = "VimEnter",
 		config = function()
@@ -401,14 +472,26 @@ require("lazy").setup({
 	-- 		})
 	-- 	end,
 	-- },
+	-- {
+	-- 	"tiagovla/tokyodark.nvim",
+	-- 	opts = {
+	-- 		-- custom options here
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 		require("tokyodark").setup(opts) -- calling setup is optional
+	-- 		vim.cmd([[colorscheme tokyodark]])
+	-- 	end,
+	-- },
+	-- { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
 	{
-		"tiagovla/tokyodark.nvim",
-		opts = {
-			-- custom options here
-		},
-		config = function(_, opts)
-			require("tokyodark").setup(opts) -- calling setup is optional
-			vim.cmd([[colorscheme tokyodark]])
+		"cpea2506/one_monokai.nvim",
+		name = "one_monokai",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("one_monokai").setup({
+				-- your options
+			})
 		end,
 	},
 	{
