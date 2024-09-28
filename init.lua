@@ -160,6 +160,12 @@ require("lazy").setup({
 			require("alpha").setup(startify.config)
 		end,
 	},
+	-- {
+	-- 	"gelguy/wilder.nvim",
+	-- 	config = function()
+	-- 		local wilder = require("wilder"), wilder.setup({ modes = { ":", "/", "?" } })
+	-- 	end,
+	-- },
 	{
 		"folke/which-key.nvim",
 		event = "VimEnter",
@@ -205,6 +211,7 @@ require("lazy").setup({
 			})
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
+			pcall(require("telescope").load_extension, "wilder")
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 			vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
@@ -241,6 +248,7 @@ require("lazy").setup({
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{ "j-hui/fidget.nvim", opts = {} },
 			{ "folke/neodev.nvim", opts = {} },
+			{ "hrsh7th/cmp-cmdline" },
 		},
 		config = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -319,6 +327,30 @@ require("lazy").setup({
 						require("lspconfig")[server_name].setup(server)
 					end,
 				},
+			})
+			local cmp = require("cmp")
+
+			-- `/` cmdline setup.
+			cmp.setup.cmdline("/", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
+
+			-- `:` cmdline setup.
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+				}, {
+					{
+						name = "cmdline",
+						option = {
+							ignore_cmds = { "Man", "!" },
+						},
+					},
+				}),
 			})
 		end,
 	},
@@ -502,28 +534,6 @@ require("lazy").setup({
 
 	-- Theme setup
 	-- -----------
-	-- {
-	-- 	"f4z3r/gruvbox-material.nvim",
-	-- 	name = "gruvbox-material",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		require("gruvbox-material").setup({
-	-- 			contrast = "hard",
-	-- 		})
-	-- 	end,
-	-- },
-	-- {
-	-- 	"tiagovla/tokyodark.nvim",
-	-- 	opts = {
-	-- 		-- custom options here
-	-- 	},
-	-- 	config = function(_, opts)
-	-- 		require("tokyodark").setup(opts) -- calling setup is optional
-	-- 		vim.cmd([[colorscheme tokyodark]])
-	-- 	end,
-	-- },
-	-- { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
 	{
 		"cpea2506/one_monokai.nvim",
 		name = "one_monokai",
