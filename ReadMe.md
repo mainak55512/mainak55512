@@ -1,5 +1,5 @@
 # 💫 About Me:
-I am a programming enthusiast currently working in TCS as a ServiceNow developer.<br>🔭 I’m currently working on 'qwe' a file-level version/revision control system written in Golang, have a look at the repo(https://github.com/mainak55512/qwe) if that interests you!<br>
+I am a programming enthusiast currently working in TCS as a ServiceNow developer.<br>🔭 I’m currently working on 'flint' a build-system and package manager for C/C++ projects written in C, have a look at the repo(https://github.com/mainak55512/flint) if that interests you!<br>
 
 
 ## 🌐 Socials:
