@@ -12,11 +12,6 @@ I am a programming enthusiast currently working in TCS as a ServiceNow developer
 ![](https://github-readme-streak-stats.herokuapp.com/?user=mainak55512&theme=vue-dark&hide_border=true)<br/>
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=mainak55512&theme=vue-dark&hide_border=true&include_all_commits=false&count_private=true&layout=compact)
 
-## 🏆 GitHub Trophies
-![](https://github-profile-trophy.vercel.app/?username=mainak55512&theme=gruvbox&no-frame=true&no-bg=false&margin-w=4)
-
-### 🔝 Top Contributed Repo
-![](https://github-contributor-stats.vercel.app/api?username=mainak55512&limit=5&theme=tokyonight&combine_all_yearly_contributions=true)
 
 ---
 [![](https://visitcount.itsvg.in/api?id=mainak55512&icon=0&color=0)](https://visitcount.itsvg.in)
